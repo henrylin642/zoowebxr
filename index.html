@@ -65,18 +65,24 @@
       }
 
       
-      body.debug-hidden #debug-console {
+      body.debug-hidden 
+      body.debug-on #debug-console {
+        display: block;
+      }
+
+      #debug-console {
         display: none;
       }
 #debug-console {
         position: fixed;
-        bottom: 6px;
-        right: 6px;
-        left: auto;
-        max-width: 60vw;
+        bottom: 90px;
+        left: 6px;
+        right: auto;
+        max-width: 55vw;
         max-height: 12vh;
         overflow-y: auto;
         background: rgba(0, 0, 0, 0.65);
+        display: none;
         color: #cbd5e1;
         font-size: 11px;
         line-height: 1.35;
