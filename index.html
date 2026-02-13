@@ -947,7 +947,7 @@
       }
 
     </style>
-    <script type="module" crossorigin src="./assets/main-BsvUhA6y.js?v=20260213a" onload="window.__mainLoaded=true;__bootlog('main js loaded v=20260213a')" onerror="__bootlog('main js load error v=20260213a')"></script>
+    <script type="module" crossorigin src="./assets/main-BsvUhA6y.js?v=20260213b" onload="window.__mainLoaded=true;__bootlog('main js loaded v=20260213b')" onerror="__bootlog('main js load error v=20260213b')"></script>
     <link rel="modulepreload" crossorigin href="./assets/three.module-D33fNwZb.js">
     <link rel="modulepreload" crossorigin href="./assets/mindar-image-three.prod-B4MNPvrq.js">
   
@@ -983,10 +983,12 @@
         }
         window.__bootlog=bootlog;
         window.__mainLoaded=false;
+        document.body && document.body.classList.add('debug-on');
         window.addEventListener('error', function(e){ bootlog('window.error: '+(e.message||e)); });
         window.addEventListener('unhandledrejection', function(e){ bootlog('unhandledrejection: '+(e.reason && e.reason.message ? e.reason.message : e.reason)); });
         bootlog('boot: html loaded (debug=1 to show)');
         window.addEventListener('DOMContentLoaded', function(){
+          document.body.classList.add('debug-on');
           setTimeout(function(){
             if (!window.__mainLoaded) {
               document.body.classList.add('debug-on');
