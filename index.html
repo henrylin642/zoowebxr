@@ -65,7 +65,6 @@
       }
 
       
-      body.debug-hidden 
       body.debug-on #debug-console {
         display: block;
       }
@@ -948,7 +947,7 @@
       }
 
     </style>
-    <script type="module" crossorigin src="./assets/main-BsvUhA6y.js?v=20260213a" onload="__bootlog('main js loaded v=20260213a')" onerror="__bootlog('main js load error v=20260213a')"></script>
+    <script type="module" crossorigin src="./assets/main-BsvUhA6y.js?v=20260213a" onload="window.__mainLoaded=true;__bootlog('main js loaded v=20260213a')" onerror="__bootlog('main js load error v=20260213a')"></script>
     <link rel="modulepreload" crossorigin href="./assets/three.module-D33fNwZb.js">
     <link rel="modulepreload" crossorigin href="./assets/mindar-image-three.prod-B4MNPvrq.js">
   
@@ -983,9 +982,20 @@
           el.appendChild(line);
         }
         window.__bootlog=bootlog;
+        window.__mainLoaded=false;
         window.addEventListener('error', function(e){ bootlog('window.error: '+(e.message||e)); });
         window.addEventListener('unhandledrejection', function(e){ bootlog('unhandledrejection: '+(e.reason && e.reason.message ? e.reason.message : e.reason)); });
         bootlog('boot: html loaded (debug=1 to show)');
+        window.addEventListener('DOMContentLoaded', function(){
+          setTimeout(function(){
+            if (!window.__mainLoaded) {
+              document.body.classList.add('debug-on');
+              bootlog('boot timeout: main bundle not loaded');
+              var statusEl = document.getElementById('status');
+              if (statusEl) statusEl.textContent = 'Status: boot timeout (main bundle not loaded)';
+            }
+          }, 5000);
+        });
       })();
     </script>
 </head>
