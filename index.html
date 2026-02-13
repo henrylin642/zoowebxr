@@ -66,10 +66,11 @@
 
       #debug-console {
         position: fixed;
-        top: 6px;
-        left: 6px;
+        bottom: 6px;
         right: 6px;
-        max-height: 28vh;
+        left: auto;
+        max-width: 60vw;
+        max-height: 20vh;
         overflow-y: auto;
         background: rgba(0, 0, 0, 0.65);
         color: #cbd5e1;
@@ -949,10 +950,11 @@
             el=document.createElement('div');
             el.id='debug-console';
             el.style.position='fixed';
-            el.style.top='6px';
-            el.style.left='6px';
+            el.style.bottom='6px';
             el.style.right='6px';
-            el.style.maxHeight='28vh';
+            el.style.left='auto';
+            el.style.maxWidth='60vw';
+            el.style.maxHeight='20vh';
             el.style.overflowY='auto';
             el.style.background='rgba(0,0,0,0.65)';
             el.style.color='#cbd5e1';
