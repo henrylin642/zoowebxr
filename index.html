@@ -937,10 +937,46 @@
       }
 
     </style>
-    <script type="module" crossorigin src="./assets/main-BsvUhA6y.js"></script>
+    <script type="module" crossorigin src="./assets/main-BsvUhA6y.js" onload="__bootlog('main js loaded')" onerror="__bootlog('main js load error')"></script>
     <link rel="modulepreload" crossorigin href="./assets/three.module-D33fNwZb.js">
     <link rel="modulepreload" crossorigin href="./assets/mindar-image-three.prod-B4MNPvrq.js">
-  </head>
+  
+    <script>
+      (function(){
+        function bootlog(msg){
+          var el=document.getElementById('debug-console');
+          if(!el){
+            el=document.createElement('div');
+            el.id='debug-console';
+            el.style.position='fixed';
+            el.style.top='6px';
+            el.style.left='6px';
+            el.style.right='6px';
+            el.style.maxHeight='28vh';
+            el.style.overflowY='auto';
+            el.style.background='rgba(0,0,0,0.65)';
+            el.style.color='#cbd5e1';
+            el.style.fontSize='11px';
+            el.style.lineHeight='1.35';
+            el.style.padding='6px 8px';
+            el.style.borderRadius='8px';
+            el.style.zIndex='9999';
+            el.style.pointerEvents='none';
+            el.style.whiteSpace='pre-wrap';
+            el.style.fontFamily='ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+            document.documentElement.appendChild(el);
+          }
+          var line=document.createElement('div');
+          line.textContent=msg;
+          el.appendChild(line);
+        }
+        window.__bootlog=bootlog;
+        window.addEventListener('error', function(e){ bootlog('window.error: '+(e.message||e)); });
+        window.addEventListener('unhandledrejection', function(e){ bootlog('unhandledrejection: '+(e.reason && e.reason.message ? e.reason.message : e.reason)); });
+        bootlog('boot: html loaded');
+      })();
+    </script>
+</head>
   <body>
     <div id="debug-console"></div>
     <div id="container"></div>
