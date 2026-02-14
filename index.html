@@ -62,24 +62,16 @@
       .status {
         font-size: 13px;
         color: var(--muted);
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        z-index: 99999;
-        background: rgba(15,23,42,0.7);
-        padding: 8px 10px;
-        border-radius: 10px;
-        max-width: 75vw;
-        pointer-events: none;
       }
 
       
+      body.debug-hidden 
       body.debug-on #debug-console {
         display: block;
       }
 
       #debug-console {
-        display: block;
+        display: none;
       }
 #debug-console {
         position: fixed;
@@ -90,13 +82,13 @@
         max-height: 12vh;
         overflow-y: auto;
         background: rgba(0, 0, 0, 0.65);
-        display: block;
+        display: none;
         color: #cbd5e1;
         font-size: 11px;
         line-height: 1.35;
         padding: 6px 8px;
         border-radius: 8px;
-        z-index: 99999;
+        z-index: 9999;
         pointer-events: none;
         white-space: pre-wrap;
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -956,7 +948,7 @@
       }
 
     </style>
-    <script type="module" crossorigin src="./assets/main-BsvUhA6y.js?v=20260213b" onload="window.__mainLoaded=true;__bootlog('main js loaded v=20260213b')" onerror="__bootlog('main js load error v=20260213b')"></script>
+    <script type="module" crossorigin src="./assets/main-BsvUhA6y.js" onload="__bootlog('main js loaded')" onerror="__bootlog('main js load error')"></script>
     <link rel="modulepreload" crossorigin href="./assets/three.module-D33fNwZb.js">
     <link rel="modulepreload" crossorigin href="./assets/mindar-image-three.prod-B4MNPvrq.js">
   
@@ -991,22 +983,9 @@
           el.appendChild(line);
         }
         window.__bootlog=bootlog;
-        window.__mainLoaded=false;
-        document.body && document.body.classList.add('debug-on');
         window.addEventListener('error', function(e){ bootlog('window.error: '+(e.message||e)); });
         window.addEventListener('unhandledrejection', function(e){ bootlog('unhandledrejection: '+(e.reason && e.reason.message ? e.reason.message : e.reason)); });
         bootlog('boot: html loaded (debug=1 to show)');
-        window.addEventListener('DOMContentLoaded', function(){
-          document.body.classList.add('debug-on');
-          setTimeout(function(){
-            if (!window.__mainLoaded) {
-              document.body.classList.add('debug-on');
-              bootlog('boot timeout: main bundle not loaded');
-              var statusEl = document.getElementById('status');
-              if (statusEl) statusEl.textContent = 'Status: boot timeout (main bundle not loaded)';
-            }
-          }, 5000);
-        });
       })();
     </script>
 </head>
