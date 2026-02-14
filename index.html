@@ -985,7 +985,12 @@
         window.__bootlog=bootlog;
         window.__mainLoaded=false;
         document.body && document.body.classList.add('debug-on');
-        window.addEventListener('error', function(e){ bootlog('window.error: '+(e.message||e)); });
+        window.addEventListener('error', function(e){
+          bootlog('window.error: '+(e.message||e));
+          if (e && e.filename) {
+            bootlog('error at: ' + e.filename + ':' + e.lineno + ':' + e.colno);
+          }
+        });
         window.addEventListener('unhandledrejection', function(e){ bootlog('unhandledrejection: '+(e.reason && e.reason.message ? e.reason.message : e.reason)); });
         bootlog('boot: html loaded (debug=1 to show)');
         // Fetch main bundle text to verify it's JS (helps when cache/404 returns HTML)
