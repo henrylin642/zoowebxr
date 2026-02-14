@@ -987,6 +987,28 @@
         window.addEventListener('error', function(e){ bootlog('window.error: '+(e.message||e)); });
         window.addEventListener('unhandledrejection', function(e){ bootlog('unhandledrejection: '+(e.reason && e.reason.message ? e.reason.message : e.reason)); });
         bootlog('boot: html loaded (debug=1 to show)');
+        // Fetch main bundle text to verify it's JS (helps when cache/404 returns HTML)
+        window.addEventListener('DOMContentLoaded', function(){
+          try {
+            var mainScript = document.querySelector('script[type="module"][src*="main-"]');
+            if (mainScript && mainScript.src) {
+              bootlog('main src: ' + mainScript.src);
+              fetch(mainScript.src, { cache: 'no-store' }).then(function(r){
+                bootlog('main status: ' + r.status + ' ' + (r.headers.get('content-type') || ''));
+                return r.text();
+              }).then(function(t){
+                var head = t.slice(0, 80).replace(/\s+/g,' ');
+                bootlog('main head: ' + head);
+              }).catch(function(err){
+                bootlog('main fetch error: ' + (err && err.message ? err.message : err));
+              });
+            } else {
+              bootlog('main src not found');
+            }
+          } catch (err) {
+            bootlog('main inspect error: ' + (err && err.message ? err.message : err));
+          }
+        });
         window.addEventListener('DOMContentLoaded', function(){
           document.body.classList.add('debug-on');
           setTimeout(function(){
